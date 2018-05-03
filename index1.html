@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>石柱</title>
+
+    <!--<link rel="shortcut icon" href="images/wn-icon.ico" type="image/x-icon">-->
+
+    <link href="./Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <!--<link href="./css/pretty.css" rel="stylesheet">-->
+
+
+    <link rel="stylesheet" href="AMstyle/stylesheets/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="AMstyle/am.css" type="text/css">
+    <link rel="stylesheet" href="AMstyle/gtfont.css" type="text/css">
+
+
+    <script type="text/javascript" src="js/AMjs/jquery.min.js"></script>
+    <script type="text/javascript" src="js/AMjs/bootstrap.js"></script>
+    <script type="text/javascript" src="js/AMjs/highcharts.js"></script>
+    <script type="text/javascript" src="js/AMjs/vue.min.js"></script>
+    <script type="text/javascript" src="js/AMjs/vue-resource.js"></script>
+    <script type="text/javascript" src="js/AMjs/vue-router.min.js"></script>
+    <!--IE兼容-->
+    <script type="text/javascript" src="js/AMjs/respond.js"></script>
+
+
+    <!--supermap环境-->
+  <!--  <script src="js/slider.js"></script>
+    <script src="js/config.js"></script>
+    <script type="text/javascript" src="js/require.min.js" data-main="js/main"></script>
+    <script type="text/javascript" src="./Build/Cesium/Cesium.js" data-main="js/main"></script>
+    <script type="text/javascript" src="./Build/Cesium/Workers/zlib.min.js" data-main="js/main"></script>-->
+    <!--初始化SuperMap场景-->
+    <!--<script type="text/javascript" src="js/AMjs/main/initSuperMap_scene.js"></script>-->
+
+    <style>
+        html, body, #cesiumContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div id="AM">
+    <!--头部-->
+    <nav class="navbar navbar-inverse navbar-fixed-top ">
+        <div class="container-fluid ">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#am-example-navbar-collapse-1" aria-expanded="true">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">LOGO</a>
+                <a class="navbar-brand" href="#">XX可视化管理系统</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="am-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">admin</a></li>
+                    <li>
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                                data-target="#myModal1">
+                            密码修改
+                        </button>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!--场景-->
+    <div class="scene">
+        <div class="container-fluid">
+            <div class="row">
+                <div class=" col-md-12">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 登录框 -->
+    <div class="modal floatBox-center fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog width-400" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title" id="myModalLabel">登录</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail31" class="col-sm-3 control-label">用户</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" id="inputEmail31" placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword31" class="col-sm-3 control-label">密码</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="inputPassword31" placeholder="密码">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">登录</button>
+                    <button type="button" class="btn btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--密码修改-->
+    <div class="modal floatBox-center fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+        <div class="modal-dialog width-300" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel1">密码修改</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="inputPassword2" class=" control-label">新密码</label>
+                            <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class=" control-label">确认</label>
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确认</button>
+                    <button type="button" class="btn btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--基础管理1-->
+    <div v-drag class="modal floatBox-left L-300 fade " id="myModal1" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-820" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title" >类型管理</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    分类
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <select multiple class="form-control">
+                                        <option>单位类型管理</option>
+                                        <option>人员类别管理</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-heading">
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="input1">关键字</label>
+                                            <input type="text" class="form-control"  placeholder="关键字">
+                                        </div>
+                                        <button type="button" class="btn btn-default">查询</button>
+                                        <button type="button" class="btn btn-default">添加</button>
+                                        <button type="button" class="btn btn-default">删除</button>
+                                        <button type="button" class="btn btn-default">修改</button>
+                                        <button type="button" class="btn btn-default">打印</button>
+                                    </form>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table class="table able-bordered no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>名称</th>
+                                            <th>编码</th>
+                                            <th>状态</th>
+                                            <th>备注</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-block">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer text-center">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination no-margin">
+                                            <li>
+                                                <a href="#" aria-label="Previous">
+                                                    上一页
+                                                </a>
+                                            </li>
+                                            <li class="disabled"><a href="#">1/10</a></li>
+                                            <li>
+                                                <a href="#" aria-label="Next">
+                                                    下一页
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--主菜单-->
+    <div v-drag class="modal floatBox-bottom fade " id="myModal2" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-500" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <div class="dropup btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                基础管理
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">类型管理</a></li>
+                                <li><a href="#">设备管理</a></li>
+                                <li><a href="#">管网管理</a></li>
+                                <li><a href="#">监测点管理</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropup btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                实时监测
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">数据监测</a></li>
+                                <li><a href="#">报警提醒</a></li>
+                                <li><a href="#">问题记录</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#myModal13">数据分析</a></li>
+                                <li><a href="#">PDA监视</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropup btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                报警统计
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">报警记录</a></li>
+                                <li><a href="#">监测点报警</a></li>
+                                <li><a href="#">区域报警</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropup btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                系统管理
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">用户管理</a></li>
+                                <li><a href="#">角色管理</a></li>
+                                <li><a href="#">权限管理</a></li>
+                                <li><a href="#">单位管理</a></li>
+                                <li><a href="#">报警设置</a></li>
+                                <li><a href="#">日志查看</a></li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3">沙盘系统
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--基础管理2-->
+    <div v-drag class="modal floatBox-left L-300 fade " id="myModal3" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-820" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title" id="#">设备管理</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-heading">
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="input1">关键字</label>
+                                            <input type="text" class="form-control" placeholder="关键字">
+                                        </div>
+                                        <button type="button" class="btn btn-default">查询</button>
+                                        <button type="button" class="btn btn-default">添加</button>
+                                        <button type="button" class="btn btn-default">删除</button>
+                                        <button type="button" class="btn btn-default">修改</button>
+                                        <button type="button" class="btn btn-default">打印</button>
+                                    </form>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table class="table able-bordered no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>名称</th>
+                                            <th>编码</th>
+                                            <th>状态</th>
+                                            <th>备注</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-block">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer text-center">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination no-margin">
+                                            <li>
+                                                <a href="#" aria-label="Previous">
+                                                    上一页
+                                                </a>
+                                            </li>
+                                            <li class="disabled"><a href="#">1/10</a></li>
+                                            <li>
+                                                <a href="#" aria-label="Next">
+                                                    下一页
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--小工具区-->
+    <div v-drag class="modal floatBox-bottom R-10 fade " id="myModal4" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-200" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!--报警-->
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <strong> <i class="demo-icon icon-megaphone"></i></strong> 报警
+                            </div>
+                            <!--坐标-->
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <strong> <i class="demo-icon icon-location-1"></i></strong> 坐标
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">小地图</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--沙盘功能-->
+    <div v-drag class="modal floatBox-top R-150 fade " id="myModal5" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-550" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="btn-group btn-group-justified " role="group" aria-label="">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default">管道</button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default">透明</button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default">数据</button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default">经纬</button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default">面积</button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default">距离</button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default">标签</button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default">导航</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary btn-block"><i
+                                    class="demo-icon icon-picture"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加-->
+    <div v-drag class="modal floatBox-left L-300 fade " id="myModal6" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-600" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title" id="">添加</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="input1">关键字</label>
+                                    <input type="text" class="form-control"  placeholder="关键字">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input1">关键字</label>
+                                    <input type="text" class="form-control"  placeholder="关键字">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input1">关键字</label>
+                                    <input type="text" class="form-control"  placeholder="关键字">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input1">关键字</label>
+                                    <input type="text" class="form-control"  placeholder="关键字">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-primary">重置</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--关联点-->
+    <div v-drag class="modal floatBox-left L-300 fade " id="myModal7" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-500" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title">关联测试点</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+
+                                    <div class="btn-group btn-group-justified " role="group" aria-label="...">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-default">上</button>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-default">中</button>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-default">下</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <select multiple class="form-control">
+                                        <option>测试点</option>
+                                        <option>测试点</option>
+                                        <option>测试点</option>
+                                        <option>测试点</option>
+                                        <option>测试点</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    液位
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    流速
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    流量
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    温度
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">14</span>
+                                    压力
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--数据监测-->
+    <div v-drag class="modal floatBox-left L-300 fade " id="myModal8" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-820" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title" >数据监测</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-heading">
+                                    监测点
+                                </div>
+                                <div class="panel-body  ">
+                                    <form class="form-inline ">
+                                        <input type="text" class="form-control"  placeholder="关键字">
+                                        <button type="button" class="btn btn-default">查询</button>
+                                    </form>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table class="table  table-bordered no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>名称</th>
+                                            <th>编码</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer text-center">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination no-margin">
+                                            <li>
+                                                <a href="#" aria-label="Previous">
+                                                    上一页
+                                                </a>
+                                            </li>
+                                            <li class="disabled"><a href="#">1/10</a></li>
+                                            <li>
+                                                <a href="#" aria-label="Next">
+                                                    下一页
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="panel  panel-default">
+                                        <div class="panel-heading">
+                                            实时数据
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <h4>液位<span class="label label-default">12</span></h4>
+                                                    <h4>流量<span class="label label-default">12</span></h4>
+                                                    <h4>压力<span class="label label-default">12</span></h4>
+                                                </div>
+                                                <div class="col-xs-6 ">
+                                                    <h4>流速<span class="label label-default">12</span></h4>
+                                                    <h4>温度<span class="label label-default">12</span></h4>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="panel no-margin panel-default">
+                                        <div class="panel-heading">
+                                            统计分析
+                                        </div>
+                                        <div class="panel-body no-padding">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div id="myChart1-1" style="width: 100%;height:180px"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--报警提醒-->
+    <div v-drag class="modal floatBox-left L-300 fade " id="myModal9" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-820" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title" >报警提醒</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-body no-padding">
+                                    <table class="table  table-bordered no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>报警点</th>
+                                            <th>报警类型</th>
+                                            <th>报警级别</th>
+                                            <th>场景定位</th>
+                                            <th>报警描述</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-xs ">定位
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs ">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-xs ">定位
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs " data-toggle="modal"
+                                                        data-target="#myModal10">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-xs ">定位
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs " data-toggle="modal"
+                                                        data-target="#myModal10">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-xs ">定位
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs " data-toggle="modal"
+                                                        data-target="#myModal10">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-xs ">定位
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs " data-toggle="modal"
+                                                        data-target="#myModal10">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-xs ">定位
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs " data-toggle="modal"
+                                                        data-target="#myModal10">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer text-center">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination no-margin">
+                                            <li>
+                                                <a href="#" aria-label="Previous">
+                                                    上一页
+                                                </a>
+                                            </li>
+                                            <li class="disabled"><a href="#">1/10</a></li>
+                                            <li>
+                                                <a href="#" aria-label="Next">
+                                                    下一页
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--报警详情-->
+    <div v-drag class="modal floatBox-center L-300 fade " id="myModal10" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-300" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title" >报警详情</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-body ">
+                                    报警详情内容
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--问题记录-->
+    <div v-drag class="modal floatBox-left L-300 fade " id="myModal11" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-820" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title" >问题记录</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-heading">
+                                    <form class="form-inline">
+                                        <input type="text" class="form-control"  placeholder="关键字">
+                                        <button type="button" class="btn btn-default">查询</button>
+                                        <button type="button" class="btn btn-default">打印</button>
+                                    </form>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table class="table able-bordered no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>提交人</th>
+                                            <th>提交时间</th>
+                                            <th>问题类型</th>
+                                            <th>位置信息</th>
+                                            <th>问题描述</th>
+                                            <th>问题图片</th>
+                                            <th>处置反馈</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-xs ">查看
+                                                </button>
+                                            </td>
+                                            <td>
+                                                反倒是
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer text-center">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination no-margin">
+                                            <li>
+                                                <a href="#" aria-label="Previous">
+                                                    上一页
+                                                </a>
+                                            </li>
+                                            <li class="disabled"><a href="#">1/10</a></li>
+                                            <li>
+                                                <a href="#" aria-label="Next">
+                                                    下一页
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--问题图片-->
+    <div v-drag class="modal floatBox-left L-300 fade " id="myModal12" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-600" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title">问题图片</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-body no-padding">
+                                    <img src="images/worldimage.jpg" alt="..." class="img-thumbnail">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--数据分析-->
+    <div v-drag class="modal floatBox-top  fade " id="myModal13-1" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-600" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    数据分析显示
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <div id="myChart1" style="width: 100%;height:160px"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-drag class="modal floatBox-left T-300  fade " id="myModal13-2" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-300" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-sm-7">
+                                            监测点监测
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <select class="form-control input-sm">
+                                                <option>液位</option>
+                                                <option>流速</option>
+                                                <option>流量</option>
+                                                <option>温度</option>
+                                                <option>压力</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <button class="btn btn-primary " type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">4</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                点1 <span class="badge">42</span>
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--报警记录-->
+    <div v-drag class="modal floatBox-left L-300 fade " id="myModal14" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel1" data-backdrop="false">
+        <div class="modal-dialog width-820" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title" >报警记录</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <form class="form-inline">
+                                        <input type="text" class="form-control" id="input1" placeholder="关键字">
+                                        <button type="button" class="btn btn-default">查询</button>
+                                        <button type="button" class="btn btn-default">打印</button>
+                                    </form>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table class="table able-bordered no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>报警点</th>
+                                            <th>报警类型</th>
+                                            <th>开始时间</th>
+                                            <th>结束时间</th>
+                                            <th>报警级别</th>
+                                            <th>报警状态</th>
+                                            <th>场景定位</th>
+                                            <th>报警描述</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs ">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs ">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs ">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-xs ">查看
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer text-center">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination no-margin">
+                                            <li>
+                                                <a href="#" aria-label="Previous">
+                                                    上一页
+                                                </a>
+                                            </li>
+                                            <li class="disabled"><a href="#">1/10</a></li>
+                                            <li>
+                                                <a href="#" aria-label="Next">
+                                                    下一页
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-heading">
+                                    按时间
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <div id="myChart2" style="width: 100%;height:200px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel no-margin panel-default">
+                                <div class="panel-heading">
+                                    按类型
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <div id="myChart3" style="width: 100%;height:200px"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $('.modal').modal({
+        keyboard: false,
+        show:true
+    });//显示登录框
+
+</script>
+<!--自定义框架-->
+<!--<script type="text/javascript" src="js/AMjs/am.js"></script>-->
+<!--<script type="text/javascript" src="js/AMjs/main/index.js"></script>-->
+<script type="text/javascript" src="js/AMjs/main/AMchart.js"></script>
+</body>
+</html>

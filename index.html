@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>石柱</title>
+
+    <!--<link rel="shortcut icon" href="images/wn-icon.ico" type="image/x-icon">-->
+
+    <link href="./Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <!--<link href="./css/pretty.css" rel="stylesheet">-->
+
+
+    <link rel="stylesheet" href="AMstyle/stylesheets/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="AMstyle/am.css" type="text/css">
+    <link rel="stylesheet" href="AMstyle/gtfont.css" type="text/css">
+
+
+    <script type="text/javascript" src="js/AMjs/jquery.min.js"></script>
+    <script type="text/javascript" src="js/AMjs/bootstrap.js"></script>
+    <script type="text/javascript" src="js/AMjs/highcharts.js"></script>
+    <script type="text/javascript" src="js/AMjs/vue.min.js"></script>
+    <script type="text/javascript" src="js/AMjs/vue-resource.js"></script>
+    <script type="text/javascript" src="js/AMjs/vue-router.min.js"></script>
+    <!--IE兼容-->
+    <script type="text/javascript" src="js/AMjs/respond.js"></script>
+
+    <!--supermap环境-->
+    <script src="js/slider.js"></script>
+    <script src="js/config.js"></script>
+    <script type="text/javascript" src="js/require.min.js" data-main="js/main"></script>
+    <script type="text/javascript" src="./Build/Cesium/Cesium.js" data-main="js/main"></script>
+    <script type="text/javascript" src="./Build/Cesium/Workers/zlib.min.js" data-main="js/main"></script>
+    <!--初始化SuperMap场景-->
+    <script type="text/javascript" src="js/AMjs/main/initSuperMap_scene.js"></script>
+
+    <style>
+        html,
+        body,
+        #cesiumContainer,
+        #AM {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="AM">
+        <!--头部-->
+        <nav class="navbar navbar-inverse navbar-fixed-top ">
+            <div class="container-fluid ">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#am-example-navbar-collapse-1"
+                        aria-expanded="true">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">LOGO</a>
+                    <a class="navbar-brand" href="#">XX可视化管理系统</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="am-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">admin</a>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal1">
+                                密码修改
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <!--场景-->
+        <div class="scene">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class=" col-md-12">
+                        <div id="cesiumContainer"></div>
+                        <div id='loadingbar' class="spinner">
+                            <div class="spinner-container container1">
+                                <div class="circle1"></div>
+                                <div class="circle2"></div>
+                                <div class="circle3"></div>
+                                <div class="circle4"></div>
+                            </div>
+                            <div class="spinner-container container2">
+                                <div class="circle1"></div>
+                                <div class="circle2"></div>
+                                <div class="circle3"></div>
+                                <div class="circle4"></div>
+                            </div>
+                            <div class="spinner-container container3">
+                                <div class="circle1"></div>
+                                <div class="circle2"></div>
+                                <div class="circle3"></div>
+                                <div class="circle4"></div>
+                            </div>
+                        </div>
+                        <div id="toolbar" style="position: absolute;left: 22px;bottom: 18px;display: none;width: 300px;">
+                            <input type="range" min="0" max="1" step="0.02" title="调整地表透明度" data-bind="value: globeAlpha, valueUpdate: 'input'">
+                            <!--<input type="text" size="5" data-bind="value: globeAlpha">-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <component :is="currentViews.currentView1" :box-Message="boxMessage.c1">
+            <!--数据显示区 -->
+        </component>
+        <component :is="currentViews.currentView2" :box-Message="boxMessage.c2">
+            <!--三维工具面板 -->
+        </component>
+        <component :is="currentViews.currentView4" :box-Message="boxMessage.c4">
+            <!--导航地图区 -->
+        </component>
+        <component :is="currentViews.currentView5" :box-Message="boxMessage.c5">
+            <!--数据分析显示 -->
+        </component>
+        <component :is="currentViews.currentView6" :box-Message="boxMessage.c6">
+            <!--数据分析显示 -->
+        </component>
+        <component :is="currentViews.currentView3" :box-Message="boxMessage.c3">
+            <!--编辑信息区域 -->
+        </component>
+        <!--主菜单-->
+        <div id="toolbar" style="position: absolute;left: 5px;top: 5px;display: none;">
+            <button type="button" id="distance" class="button black">测距</button>
+            <button type="button" id="area" class="button black">测面</button>
+            <button type="button" id="height" class="button black">测高</button>
+            <button type="button" id="clear" class="button black">清除</button>
+            <div style="width: 120px;">
+                <select id="selOpt" class="selectpicker show-tick form-control">
+                    <option selected value="1">空间量算</option>
+                    <option value="2">贴地量算</option>
+                </select>
+            </div>
+        
+        </div>
+        <div class="modal floatBox-bottom fade " id="main_menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" data-backdrop="false">
+            <div class="modal-dialog width-400" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="dropup btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    基础管理
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#" @click="fn(nav[0])">类型管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="fn(nav[1])">设备管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="fn(nav[3])">管网管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="fn(nav[4])">监测点管理</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropup btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    实时监测
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">数据监测</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">报警提醒</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">问题记录</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">数据分析</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">PDA监视</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropup btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    报警统计
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">报警记录</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">监测点报警</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">区域报警</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropup btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    系统管理
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">用户管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">角色管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">权限管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">单位管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">报警设置</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">日志查看</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="fn(nav[2])">沙盘系统</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--组件-->
+    <template id="box-v1">
+        <!--带有左侧分类的信息显示模板v1-->
+        <div v-drag class="modal floatBox-left L-300 fade " :id="boxID" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="myModalLabel1">
+            <div class="modal-dialog width-820" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">{{boxTitle}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        {{classify.title}}
+                                    </div>
+                                    <div class="panel-body no-padding">
+                                        <select multiple class="form-control" v-model="selected" @change="selectFn">
+                                            <option v-for="option in classify.options" :value="option.values">
+                                                {{ option.text }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="panel no-margin panel-default">
+                                    <div class="panel-heading">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="关键字">
+                                            </div>
+                                            <button type="button" class="btn btn-default" @click="">查询
+                                            </button>
+                                            <button type="button" class="btn btn-default" @click="showBox(boxMessage.Box[0])">添加
+                                            </button>
+                                            <button type="button" class="btn btn-default" @click="">删除
+                                            </button>
+                                            <button type="button" class="btn btn-default" @click="showBox(boxMessage.Box[1])">修改
+                                            </button>
+                                            <button type="button" class="btn btn-default">打印</button>
+                                        </form>
+                                    </div>
+                                    <div class="panel-body no-padding">
+                                        <table class="table able-bordered no-margin">
+                                            <thead>
+                                                <tr>
+                                                    <th v-for="th in table.ths">{{th}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="item in Items">
+                                                    <td>
+                                                        <input type="checkbox" :id="item.id" :value="item.id" v-model="checkedNames">
+                                                    </td>
+                                                    <th scope="row">{{item.id}}</th>
+                                                    <td>{{item.name}}</td>
+                                                    <td>{{item.code}}</td>
+                                                    <td>{{item.status}}</td>
+                                                    <td>{{item.remarks}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="panel-footer text-center">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination no-margin">
+                                                <li>
+                                                    <a href="#" aria-label="Previous" @click="pageBtn(-1)">
+                                                        上一页
+                                                    </a>
+                                                </li>
+                                                <li class="disabled">
+                                                    <a href="#">{{CurrentPage}}/{{PageCount}}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" aria-label="Next" @click="pageBtn(1)">
+                                                        下一页
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </template>
+    <template id="box-v2">
+        <!--信息显示模板v2-->
+        <div v-drag class="modal floatBox-left L-300 fade " :id="boxID" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="myModalLabel1">
+            <div class="modal-dialog width-820" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                        <h4 class="modal-title">{{boxTitle}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel no-margin panel-default">
+                                    <div class="panel-heading">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <!--<label for="input1">关键字</label>-->
+                                                <input type="text" class="form-control" id="input1" placeholder="关键字">
+                                            </div>
+                                            <button type="button" class="btn btn-default">查询</button>
+                                            <button type="button" class="btn btn-default" @click="showBox(boxMessage.Box[0])">添加
+                                            </button>
+                                            <button type="button" class="btn btn-default">删除</button>
+                                            <button type="button" class="btn btn-default" @click="showBox(boxMessage.Box[1])">修改
+                                            </button>
+                                            <button type="button" class="btn btn-default">打印</button>
+                                        </form>
+                                    </div>
+                                    <div class="panel-body no-padding">
+                                        <table class="table able-bordered no-margin">
+                                            <thead>
+                                                <tr>
+                                                    <th v-for="th in table.ths">{{th}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody v-if="layout==='a'">
+                                                <tr v-for="item in Items">
+                                                    <td>
+                                                        <input type="checkbox" :id="item.id" :value="item.id" v-model="checkedNames">
+                                                    </td>
+                                                    <th scope="row">{{item.id}}</th>
+                                                    <td>{{item.name}}</td>
+                                                    <td>{{item.code}}</td>
+                                                    <td>{{item.status}}</td>
+                                                    <td>{{item.remarks}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary btn-block" @click="showBox(boxMessage.Box[2])">远程设置
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody v-if="layout==='b'">
+                                                <tr v-for="item in Items">
+                                                    <td>
+                                                        <input type="checkbox" :id="item.id" :value="item.id" v-model="checkedNames">
+                                                    </td>
+                                                    <th scope="row">{{item.id}}</th>
+                                                    <td>{{item.name}}</td>
+                                                    <td>{{item.code}}</td>
+                                                    <td>{{item.status}}</td>
+                                                    <td>{{item.remarks}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary btn-block" @click="showBox(boxMessage.Box[2])">查看
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody v-if="layout==='c'">
+                                                <tr v-for="item in Items">
+                                                    <td>
+                                                        <input type="checkbox" :id="item.id" :value="item.id" v-model="checkedNames">
+                                                    </td>
+                                                    <th scope="row">{{item.id}}</th>
+                                                    <td>{{item.name}}</td>
+                                                    <td>{{item.code}}</td>
+                                                    <td>{{item.status}}</td>
+                                                    <td>{{item.remarks}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary btn-block" @click="showBox(boxMessage.Box[2])">查看
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <div class="panel-footer text-center">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination no-margin">
+                                                <li>
+                                                    <a href="#" aria-label="Previous" @click="pageBtn(-1)">
+                                                        上一页
+                                                    </a>
+                                                </li>
+                                                <li class="disabled">
+                                                    <a href="#">{{CurrentPage}}/{{PageCount}}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" aria-label="Next" @click="pageBtn(1)">
+                                                        下一页
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </template>
+    <template id="box-v3">
+        <!--沙盘功能-->
+        <div v-drag class="modal floatBox-top R-150 fade " :id="boxID" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="myModalLabel1">
+            <div class="modal-dialog width-550" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="btn-group btn-group-justified " role="group" aria-label="">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default" @add="names()">管道</button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">透明</button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">数据</button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">经纬</button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">面积</button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">距离</button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">标签</button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">导航</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-primary btn-block">
+                                    <i class="demo-icon icon-picture"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="box-v4">
+        <!--添加辅助弹窗-->
+        <div v-drag class="modal floatBox-left L-300 fade " :id="boxID" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="myModalLabel1">
+            <div class="modal-dialog width-600" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                        <h4 class="modal-title">{{boxTitle}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="input1">关键字</label>
+                                        <input type="text" class="form-control" id="" placeholder="关键字">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input1">关键字</label>
+                                        <input type="text" class="form-control" id="" placeholder="关键字">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input1">关键字</label>
+                                        <input type="text" class="form-control" id="" placeholder="关键字">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input1">关键字</label>
+                                        <input type="text" class="form-control" id="" placeholder="关键字">
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">保存</button>
+                        <button type="button" class="btn btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+    <template id="box-v5">
+        <div v-drag class="modal floatBox-left L-300 fade  in" :id="boxID" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+            data-backdrop="false" style="display: block;">
+            <div class="modal-dialog width-500" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+
+                        <h4 class="modal-title">{{boxTitle}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="panel panel-default">
+                                    <div v-if="layout==='a'" class="panel-heading">
+                                        <div class="btn-group btn-group-justified " role="group" aria-label="...">
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-default">上</button>
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-default">中</button>
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-default">下</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body no-padding">
+                                        <select multiple="" class="form-control">
+                                            <option>测试点</option>
+                                            <option>测试点</option>
+                                            <option>测试点</option>
+                                            <option>测试点</option>
+                                            <option>测试点</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <span class="badge">14</span>
+                                        液位
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="badge">14</span>
+                                        流速
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="badge">14</span>
+                                        流量
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="badge">14</span>
+                                        温度
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="badge">14</span>
+                                        压力
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="box-v"></template>
+    <script>
+
+    </script>
+    <!--项目基础库-->
+    <script type="text/javascript" src="js/AMjs/main/AMchart.js"></script>
+    <script type="text/javascript" src="js/AMjs/am.js"></script>
+    <script type="text/javascript" src="js/AMjs/main/index.js"></script>
+</body>
+
+</html>

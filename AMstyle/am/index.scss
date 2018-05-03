@@ -1,0 +1,44 @@
+.panel{
+  &.no-margin{
+    margin: 0px;
+  }
+  .panel-body{
+    &.no-padding{
+      padding:0px;
+    }
+  }
+}
+.pagination{
+  &.no-margin{
+    margin: 0px;
+  }
+}
+.table{
+  &.no-margin{
+    margin: 0px;
+  }
+}
+.form-group{
+  &.no-margin{
+    margin: 0px;
+  }
+}
+.carousel {
+  .carousel-indicators {
+
+  }
+  .carousel-inner {
+    .item {
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+.text-nowrap {
+  &.v1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

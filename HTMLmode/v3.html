@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>html</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="theme.css"/>
+    <!--IE兼容-->
+    <script type="text/javascript" src="../js/respond.js"></script>
+    <style type="text/css">
+        .title {
+            color: red
+        }
+    </style>
+</head>
+<body>
+<!--基础-->
+<h4 class="title">基础</h4>
+<div>
+    <h1>标题</h1>
+    <h2>标题</h2>
+    <h3>标题</h3>
+    <h4>标题</h4>
+    <h5>标题</h5>
+    <h6>标题</h6>
+    换行<br>br
+</div>
+<hr>
+<!--格式-->
+<h4 class="title">格式</h4>
+<div>
+    <progress value="22" max="100"></progress>
+    <meter value="2" min="0" max="10"></meter>
+    <meter value="0.3" high="0.9" low="0.1" optimum="0.5"></meter>
+    <time datetime="2008-02-14" pubdate="pubdate">time标签</time>
+    <br><br>
+    Username
+    <bdi dir="ltr">Bill time</bdi>
+    :80 points
+    <br>
+    Username
+    <bdi dir="rtl">Bill time</bdi>
+    :80 points
+    <br>
+    <bdo dir="rtl">Here is some text</bdo>
+    <br>
+    <bdo dir="ltr">Here is some text</bdo>
+    <br><br>
+    <abbr title="People's Republic of China">PRC</abbr>
+    <br><br>
+    <pre>
+        &lt;html&gt;
+
+        &lt;head&gt;
+          &lt;script type=&quot;text/javascript&quot; src=&quot;loadxmldoc.js&quot;&gt;
+        &lt;/script&gt;
+        &lt;/head&gt;
+
+        &lt;body&gt;
+
+          &lt;script type=&quot;text/javascript&quot;&gt;
+            xmlDoc=<a href="dom_loadxmldoc.asp">loadXMLDoc</a>(&quot;books.xml&quot;);
+            document.write(&quot;xmlDoc is loaded, ready for use&quot;);
+          &lt;/script&gt;
+
+        &lt;/body&gt;
+
+        &lt;/html&gt;
+    </pre>
+    <br><br>
+    <address>
+        Written by <a href="mailto:webmaster@example.com">Donald Duck</a>.<br>
+        Visit us at:<br>
+        Example.com<br>
+        Box 564, Disneyland<br>
+        USA
+    </address>
+    <br><br>
+    <em>强调</em>&nbsp;<strong>强调</strong>&nbsp;<var>定义变量</var>&nbsp;<code>计算机代码文本</code>
+    &nbsp; <kbd>键盘文本</kbd>&nbsp;<samp>样本文本</samp>&nbsp;<cite>引用</cite>&nbsp;<dfn>定义项目</dfn>
+    <br><br>
+    <blockquote cite="http://www.wwf.org">
+        标记长的引用
+        Here is a long quotation here is a long quotation here is a long quotation
+        here is a long quotation here is a long quotation here is a long quotation
+        here is a long quotation here is a long quotation here is a long quotation.
+    </blockquote>
+    <q cite="http://www.wwf.org">标记短的引用Here is a short quotation here is a short quotation</q>
+    <br><br>
+    <mark>milk</mark>
+    &nbsp;&nbsp;co<sup>2</sup>&nbsp;&nbsp;ho<sub>2</sub>
+    <br><br>
+    <b>粗体文本</b>&nbsp;
+    <del>被删除文本</del>
+    &nbsp;<i>斜体文本</i>&nbsp;
+    <small>小号文本</small>
+    &nbsp;<big>文本</big>&nbsp;<tt>打字机文本</tt>
+    <br><br>
+    <ruby>
+        漢
+        <rt>
+            <rp>(</rp>
+            ㄏㄢˋ
+            <rp>)</rp>
+        </rt>
+    </ruby>
+</div>
+<hr>
+<!--样式/节-->
+<h4 class="title">样式/节</h4>
+<div>
+    <div>div</div>
+    <span>span</span>
+    <header>页眉header</header>
+    <section>章节section</section>
+    <footer>页脚footer</footer>
+    <article>文章article</article>
+    <aside>页面内容之外的内容aside</aside>
+</div>
+<hr>
+<!--链接-->
+<h4 class="title">链接</h4>
+<div>
+    <a href="#">链接</a>
+    <nav>
+        <a href="index.asp">Home</a>
+        <a href="html5_meter.asp">Previous</a>
+        <a href="html5_noscript.asp">Next</a>
+    </nav>
+</div>
+<hr>
+<!--列表-->
+<h4 class="title">列表</h4>
+<div>
+    <ul>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ul>
+    <ol>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ol>
+    <dl>
+        <dt>计算机</dt>
+        <dd>用来计算的仪器 ... ...</dd>
+        <dt>显示器</dt>
+        <dd>以视觉方式显示信息的装置 ... ...</dd>
+    </dl>
+</div>
+<hr>
+<!--表格-->
+<h4 class="title">表格</h4>
+<div>
+    <table border="1">
+        <caption>表格标题</caption>
+        <thead>
+        <tr>
+            <th>Month</th>
+            <th>Savings</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>February</td>
+            <td rowspan="2">>$80</td>
+        </tr>
+        <tr>
+            <td>$100</td>
+        </tr>
+        <tr>
+            <td colspan="2">February</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td>Sum</td>
+            <td>$180</td>
+        </tr>
+        </tfoot>
+    </table>
+    <br>
+    <table border="1" width="400" cellpadding="10" cellspacing="10" frame="box" rules="cols"
+           summary="Monthly savings for the Flintstones family">
+        <caption>表格标题</caption>
+        <thead>
+        <tr>
+            <th>Month</th>
+            <th>Savings</th>
+            <th>Savings</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr bgcolor="#FF0000" align="center" valign="middle">
+            <td>January</td>
+            <td>$100</td>
+            <td>$100</td>
+        </tr>
+        <tr align="char" char="." charoff="8">
+            <td>February</td>
+            <td>$80.00</td>
+            <td>$100.00</td>
+        </tr>
+        <tr>
+            <td>February</td>
+            <td>$80</td>
+            <td>$100</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td abbr="IBM" align="right" axis="name" headers="name">Sum</td>
+            <td axis="contact" valign="top">$180</td>
+            <td axis="contact" valign="bottom">$100</td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<hr>
+<!--框架-->
+<h4 class="title">框架</h4>
+<div>
+    <iframe name="iframe_a" src="v2.html" width="400" height="120" marginwidth="50px" marginheight="50px"
+            frameborder="1" scrolling="yes" longdesc="w3school.txt" sandbox="">
+        <p>Your browser does not support iframes.</p>
+    </iframe>
+</div>
+<hr>
+<!--图像-->
+<h4 class="title">图像</h4>
+<div>
+    <img width="300" height="300" src="../images/ex.png" usemap="#planetmap" alt="图片">
+    <map name="planetmap" id="planetmap">
+        <area shape="circle" coords="180,139,60" href="#" target="_blank" alt="Venus"/>
+        <area shape="circle" coords="129,161,10" href="#" target="_blank" alt="Mercury"/>
+        <area shape="rect" coords="0,0,110,260" href="#" target="_blank" alt="Sun"/>
+    </map>
+    <br>
+    <canvas id="myCanvas" style="background: #ffff00"></canvas>
+    <script type="text/javascript">
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#FF0000';
+        ctx.fillRect(0, 0, 80, 80);
+    </script>
+    <br>
+    <figure>
+        <figcaption>图像figure</figcaption>
+        <img src="../images/ex.png" width="350" height="234"/>
+    </figure>
+</div>
+<hr>
+<!--表单-->
+<h4 class="title">表单</h4>
+<div>
+    <form action="form_action.asp" method="get" name="adm">
+        <input id="myCar" list="cars"/>
+        <datalist id="cars">
+            <option value="BMW">
+            <option value="Ford">
+            <option value="Volvo">
+        </datalist>
+
+        <p>姓名: <input type="text" name="fname"/></p>
+        <p>密码：<input type="password" name="password"></p>
+        <p>
+            <input type="checkbox" name="Bike">
+            我喜欢汽车：
+            <input type="checkbox" name="Car">
+            我喜欢自行车：
+        </p>
+        <p>
+            男性：
+            <input type="radio" checked="checked" name="Sex" value="male"/>
+            女性：
+            <input type="radio" name="Sex" value="female"/>
+        </p>
+        <p>
+            <select name="cars">
+                <optgroup label="Swedish Cars">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                </optgroup>
+                <optgroup label="German Cars">
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                </optgroup>
+            </select>
+            <select name="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat" selected="selected">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+            <textarea rows="10" cols="30"></textarea>
+        </p>
+        <p>
+            <input type="image" value="image">
+            <input type="file" value="file">
+        </p>
+        <input type="button" value="button">
+        <input type="button" value="button" disabled="disabled">
+        <input type="submit" value="Submit"/>
+        <input type="reset" value="reset">
+        <fieldset>
+            <legend>健康信息</legend>
+            <label for="male">身高：</label>
+            <input type="text" id="male"/>
+            <label for="kkk">体重：</label>
+            <input type="text" id="kkk"/>
+        </fieldset>
+    </form>
+</div>
+<hr>
+<!--音频/视频-->
+<h4 class="title">音频/视频</h4>
+<div>
+    <audio controls="controls" preload="auto">
+        <source src="../video/OldPhone.mp3" type="audio/mpeg"/>
+        Your browser does not support the audio element.
+    </audio>
+    <video width="320" height="240" controls="controls">
+        <source src="../video/Ice-cream.mp4" type="video/mp4" />
+        <track kind="subtitles" src="subs_chi.srt" srclang="zh" label="Chinese">
+    </video>
+</div>
+<hr>
+<!--音频/视频-->
+<h4 class="title">音频/视频</h4>
+<div>
+    <embed src="helloworld.swf" type="application/x-shockwave-flash" />
+    <object classid="clsid:F08DF954-8592-11D1-B16A-00C0F0283628" id="Slider1"
+            width="100" height="50">
+        <param name="BorderStyle" value="1" />
+        <param name="MousePointer" value="0" />
+        <param name="Enabled" value="1" />
+        <param name="Min" value="0" />
+        <param name="Max" value="10" />
+    </object>
+</div>
+<hr>
+</body>
+</html>

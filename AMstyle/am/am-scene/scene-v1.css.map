@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,MAAO;EACL,MAAM,EAAG,CAAC;EACV,OAAO,EAAE,CAAC",
+"sources": ["scene-v1.scss"],
+"names": [],
+"file": "scene-v1.css"
+}

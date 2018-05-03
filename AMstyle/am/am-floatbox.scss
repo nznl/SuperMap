@@ -1,0 +1,81 @@
+.modal {
+  overflow: visible;
+  &.floatBox {
+    right: unset;
+    bottom: unset;
+  }
+  &.floatBox-top {
+    top: 54px;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    &.L-200{
+      left: 200PX;
+      right: unset;
+    }
+    &.R-150{
+      left: unset;
+      right: 150px;
+    }
+  }
+
+  &.floatBox-bottom {
+    top: unset;
+    left: 40%;
+    right: unset;
+    bottom: 8px;
+    &.L-10{
+      left: 10px;
+      right: unset;
+    }
+    &.R-10{
+      left: unset;
+      right: 10px;
+    }
+  }
+  &.floatBox-left {
+    top: 120px;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    &.T-300{
+      top: 300PX;
+    }
+    &.L-300{
+      left: 300PX;
+      right: unset;
+    }
+  }
+
+  &.floatBox-center {
+    top: 12%;
+    left: 42%;
+    right: unset;
+    bottom: unset;
+  }
+  .modal-dialog {
+    margin: auto;
+    &.width-200 {
+      width: 200px;
+    }
+    &.width-300 {
+      width: 300px;
+    }
+    &.width-400 {
+      width: 400px;
+    }
+    &.width-500 {
+      width: 500px;
+    }
+    &.width-560 {
+      width: 560px;
+    }
+    &.width-600 {
+      width: 600px;
+    }
+    &.width-820 {
+      width: 820px;
+    }
+
+  }
+}

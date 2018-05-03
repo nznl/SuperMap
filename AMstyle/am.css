@@ -1,0 +1,86 @@
+.scene {
+  margin: 0;
+  padding: 0; }
+
+.modal {
+  overflow: visible; }
+  .modal.floatBox {
+    right: unset;
+    bottom: unset; }
+  .modal.floatBox-top {
+    top: 54px;
+    left: unset;
+    right: unset;
+    bottom: unset; }
+    .modal.floatBox-top.L-200 {
+      left: 200PX;
+      right: unset; }
+    .modal.floatBox-top.R-150 {
+      left: unset;
+      right: 150px; }
+  .modal.floatBox-bottom {
+    top: unset;
+    left: 40%;
+    right: unset;
+    bottom: 8px; }
+    .modal.floatBox-bottom.L-10 {
+      left: 10px;
+      right: unset; }
+    .modal.floatBox-bottom.R-10 {
+      left: unset;
+      right: 10px; }
+  .modal.floatBox-left {
+    top: 120px;
+    left: unset;
+    right: unset;
+    bottom: unset; }
+    .modal.floatBox-left.T-300 {
+      top: 300PX; }
+    .modal.floatBox-left.L-300 {
+      left: 300PX;
+      right: unset; }
+  .modal.floatBox-center {
+    top: 12%;
+    left: 42%;
+    right: unset;
+    bottom: unset; }
+  .modal .modal-dialog {
+    margin: auto; }
+    .modal .modal-dialog.width-200 {
+      width: 200px; }
+    .modal .modal-dialog.width-300 {
+      width: 300px; }
+    .modal .modal-dialog.width-400 {
+      width: 400px; }
+    .modal .modal-dialog.width-500 {
+      width: 500px; }
+    .modal .modal-dialog.width-560 {
+      width: 560px; }
+    .modal .modal-dialog.width-600 {
+      width: 600px; }
+    .modal .modal-dialog.width-820 {
+      width: 820px; }
+
+.panel.no-margin {
+  margin: 0px; }
+.panel .panel-body.no-padding {
+  padding: 0px; }
+
+.pagination.no-margin {
+  margin: 0px; }
+
+.table.no-margin {
+  margin: 0px; }
+
+.form-group.no-margin {
+  margin: 0px; }
+
+.carousel .carousel-inner .item img {
+  width: 100%;
+  height: auto; }
+
+.text-nowrap.v1 {
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+/*# sourceMappingURL=am.css.map */

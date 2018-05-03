@@ -1,0 +1,163 @@
+{
+  "status": "Success",
+  "data": {
+    "classify": {
+      "title": "分类",
+      "options": [
+        {
+          "text": "ee",
+          "values": "ee",
+          "dataUrl": "data/am/test.json"
+        },
+        {
+          "text": "eee",
+          "values": "eee",
+          "dataUrl": "data/am/test.json"
+        },
+        {
+          "text": "eeee",
+          "values": "eeee",
+          "dataUrl": "data/am/test.json"
+        }
+      ]
+    },
+    "table": {
+      "ths": [
+        "",
+        "序号",
+        "名称",
+        "编码",
+        "状态",
+        "备注"
+      ],
+      "items": [
+        {
+          "id": "1",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd123"
+        },
+        {
+          "id": "2",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "3",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "4",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "5",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "6",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "7",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "8",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "9",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "10",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "11",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "12",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "13",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "14",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "15",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "16",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "17",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        },
+        {
+          "id": "18",
+          "name": "ad",
+          "code": "asd",
+          "status": "as",
+          "remarks": "asd"
+        }
+      ]
+    }
+  }
+}

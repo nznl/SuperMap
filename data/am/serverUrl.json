@@ -1,0 +1,337 @@
+{
+  "status": "Success",
+  "data": {
+    "dataName": "链接地址",
+    "nav": [
+      {
+        "id": "0",
+        "component": "com1",
+        "template": "box-v1",
+        "layout": "a",
+        "boxID": "type_management",
+        "boxTitle": "类型管理",
+        "urls": {
+          "table": {
+            "name": "表信息",
+            "url": "data/am/test.json",
+            "type": "post",
+            "data": {
+              "a": "",
+              "b": ""
+            }
+          },
+          "classify": {
+            "name": "分类列表",
+            "url": "data/am/test.json",
+            "type": "post",
+            "data": {
+              "a": "",
+              "b": ""
+            }
+          }
+        },
+        "Box": [
+          {
+            "id": "0",
+            "component": "com3",
+            "template": "box-v4",
+            "layout": "a",
+            "boxID": "type_management_add",
+            "boxTitle": "添加",
+            "urls": [
+              {
+                "name": "添加信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": "",
+                  "b": ""
+                },
+                "result": {}
+              }
+            ]
+          },
+          {
+            "id": "1",
+            "component": "com3",
+            "template": "box-v4",
+            "layout": "a",
+            "boxID": "type_management_alter",
+            "boxTitle": "修改",
+            "urls": [
+              {
+                "name": "修改信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": "",
+                  "b": ""
+                },
+                "result": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "component": "com1",
+        "template": "box-v2",
+        "layout": "a",
+        "boxID": "equipment_management",
+        "boxTitle": "设备管理",
+        "urls": {
+          "table": {
+            "name": "表信息",
+            "url": "data/am/test1.json",
+            "type": "post",
+            "data": {
+              "a": "",
+              "b": ""
+            }
+          }
+        },
+        "Box": [
+          {
+            "id": "0",
+            "component": "com3",
+            "template": "box-v4",
+            "layout": "a",
+            "boxID": "equipment_management_add",
+            "boxTitle": "添加",
+            "urls": [
+              {
+                "name": "添加信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": "",
+                  "b": ""
+                },
+                "result": {}
+              }
+            ]
+          },
+          {
+            "id": "1",
+            "component": "com3",
+            "template": "box-v4",
+            "layout": "a",
+            "boxID": "equipment_management_alter",
+            "boxTitle": "修改",
+            "urls": [
+              {
+                "name": "修改信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": "",
+                  "b": ""
+                },
+                "result": {}
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "component": "com3",
+            "template": "box-v4",
+            "layout": "a",
+            "boxID": "equipment_management_set",
+            "boxTitle": "远程设置",
+            "urls": [
+              {
+                "name": "设置信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": ""
+                },
+                "result": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "component": "com2",
+        "template": "box-v3",
+        "layout": "a",
+        "boxID": "3Dtool",
+        "boxTitle": "沙盘系统",
+        "urls": [
+          {
+            "name": "",
+            "url": "",
+            "type": "post",
+            "data": {
+              "a": "",
+              "b": ""
+            }
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "component": "com1",
+        "template": "box-v2",
+        "layout": "b",
+        "boxID": "pipe_management",
+        "boxTitle": "管网管理",
+        "urls": {
+          "table": {
+            "name": "表信息",
+            "url": "data/am/test2.json",
+            "type": "post",
+            "data": {
+              "a": "",
+              "b": ""
+            }
+          }
+        },
+        "Box": [
+          {
+            "id": "0",
+            "component": "com3",
+            "template": "box-v4",
+            "layout": "a",
+            "boxID": "pipe_management_add",
+            "boxTitle": "添加",
+            "urls": [
+              {
+                "name": "添加信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": "",
+                  "b": ""
+                },
+                "result": {}
+              }
+            ]
+          },
+          {
+            "id": "1",
+            "component": "com3",
+            "template": "box-v4",
+            "layout": "a",
+            "boxID": "pipe_management_alter",
+            "boxTitle": "修改",
+            "urls": [
+              {
+                "name": "修改信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": "",
+                  "b": ""
+                },
+                "result": {}
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "component": "com3",
+            "template": "box-v5",
+            "layout": "a",
+            "boxID": "pipe_management_look",
+            "boxTitle": "关联测试点",
+            "urls": [
+              {
+                "name": "设置信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": ""
+                },
+                "result": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "component": "com1",
+        "template": "box-v2",
+        "layout": "c",
+        "boxID": "point_management",
+        "boxTitle": "监测点管理",
+        "urls": {
+          "table": {
+            "name": "表信息",
+            "url": "data/am/test3.json",
+            "type": "post",
+            "data": {
+              "a": "",
+              "b": ""
+            }
+          }
+        },
+        "Box": [
+          {
+            "id": "0",
+            "component": "com3",
+            "template": "box-v4",
+            "layout": "a",
+            "boxID": "point_management_add",
+            "boxTitle": "添加",
+            "urls": [
+              {
+                "name": "添加信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": "",
+                  "b": ""
+                },
+                "result": {}
+              }
+            ]
+          },
+          {
+            "id": "1",
+            "component": "com3",
+            "template": "box-v4",
+            "layout": "a",
+            "boxID": "point_management_alter",
+            "boxTitle": "修改",
+            "urls": [
+              {
+                "name": "修改信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": "",
+                  "b": ""
+                },
+                "result": {}
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "component": "com3",
+            "template": "box-v5",
+            "layout": "b",
+            "boxID": "point_management_look",
+            "boxTitle": "关联测试点",
+            "urls": [
+              {
+                "name": "设置信息",
+                "url": "data/am/test.json",
+                "type": "post",
+                "data": {
+                  "a": ""
+                },
+                "result": {}
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--<link rel="shortcut icon" href="images/wn-icon.ico" type="image/x-icon">-->
+    <link rel="stylesheet" href="../AMstyle/stylesheets/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="../AMstyle/am.css" type="text/css">
+    <link rel="stylesheet" href="../AMstyle/gtfont.css" type="text/css">
+
+
+    <script type="text/javascript" src="../js/AMjs/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/AMjs/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/AMjs/vue.min.js"></script>
+    <script type="text/javascript" src="../js/AMjs/vue-resource.js"></script>
+    <script type="text/javascript" src="../js/AMjs/vue-router.min.js"></script>
+    <script type="text/javascript" src="../js/AMjs/am.js"></script>
+
+    <!--IE兼容-->
+    <script type="text/javascript" src="../js/AMjs/respond.js"></script>
+
+    <style>
+        .an.a {
+            width: 300px;
+            height: 300px;
+            background: red;
+        }
+
+        .an.b {
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 10px auto;
+        }
+
+        .fade-enter-active, .fade-leave-active {
+            transition: 1s all ease;
+        }
+
+        .fade-enter-active {
+            opacity: 1;
+            width: 300px;
+            height: 300px;
+        }
+
+        .fade-leave-active {
+            opacity: 0;
+            width: 300px;
+            height: 300px;
+        }
+
+        .fade-enter, .fade-leave {
+            opacity: 0;
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<!--主体区-->
+<div id="v1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                {{num1}}
+            </div>
+            <div class="col-md-2">
+                {{cr1}}
+            </div>
+            <div class="col-md-2">
+                {{arr}}
+            </div>
+            <div class="col-md-2">
+                {{obj}}
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item" v-for="(value,index) in arr">{{value}}-{{index}}</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item" v-for="(value,key,index) in obj">{{value}}-{{index}}-{{key}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="ee" v-model="num1">
+            </div>
+            <div class="col-md-2">
+                <input type="button" class="btn btn-primary" value="button" @click="f1()">
+            </div>
+            <div class="col-md-4">
+                <input type="button" class="btn btn-primary" value="显示隐藏" @click="a=!a">
+                <span class="bg-info" v-show="a">显示隐藏</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="well" @click="f2($event,'qwe')">
+                    <input type="button" class="btn btn-primary" value="事件冒泡1" @click="f2($event,'qwe1')">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="well" @click="f2($event,'qwe')">
+                    <input type="button" class="btn btn-primary" value="事件冒泡2" @click.stop="f3($event,'qwe2')">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="button" class="btn btn-primary" value="默认行为1" @contextmenu="f4($event)">
+            </div>
+            <div class="col-md-2">
+                <input type="button" class="btn btn-primary" value="默认行为2" @contextmenu.prevent="f5()">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="键盘事件" @keyup="f6($event)">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="键盘事件" @keydown="f6($event)">
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img :src="url" class="img-responsive" alt="img"/>
+            </div>
+            <div class="col-md-2">
+                <img :src="url" class="img-responsive" alt="img"/>
+            </div>
+            <div class="col-md-2">
+                <button type="button" :class="[c1,c2]">class1</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" :class="{'btn':a,'btn-primary':a}">class2</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" :class="json1">class3</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="数据模板" v-model="c1">
+            </div>
+            <div class="col-md-2">
+                <span>{{c1}}</span>---<span v-once>{{c1}}</span>---<span v-html="c1"></span>
+            </div>
+            <div class="col-md-2">
+                <span class="bg-info">{{cr1|c|b}}</span>
+            </div>
+            <div class="col-md-2">
+                <input type="button" class="btn btn-primary" value="后台交互get" @click="get()">
+            </div>
+            <div class="col-md-2">
+                <input type="button" class="btn btn-primary" value="后台交互post" @click="post()">
+            </div>
+            <div class="col-md-2">
+                <my-aaa my-Message="hello!" message2="he"></my-aaa>
+                <input type="button" class="btn btn-primary" value="后台交互jsonp" @click="jsonp()">
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div id="v2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="button" value="更新数据" @click="update">
+                <input type="button" value="销毁组件" @click="destroy">
+                <my-aaa my-Message="hello!" message2="he"></my-aaa>
+                <my-c1></my-c1>
+                {{msg}}
+            </div>
+            <div class="col-md-4">
+                <input type="button" value="添加" @click="add">
+                <ul>
+                    <li v-for="(val,index) in list">
+                        {{val}}{{index}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    <li v-for="(val,key,index) in list1" :key="index">
+                        {{val}}-{{index}}-{{key}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" @keyup.a="change">
+            </div>
+            <div class="col-md-4">
+                过滤器 {{num|toDou(12,4)}}
+            </div>
+            <div class="col-md-4">
+                <span>父级1：{{giveData.a}}</span>
+                <span>父级1：{{a}}</span>
+                <my-c2 :msg1="giveData" :msg2="a"></my-c2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <com-a></com-a>
+                <com-b></com-b>
+                <com-c></com-c>
+            </div>
+            <div class="col-md-4">
+                <input type="button" value="点击显示隐藏1" @click="show=!show">
+                <transition name="fade"
+                            @before-enter="beforeEnter"
+                            @enter="enter"
+                            @after-enter="afterEnter"
+                            @before-leave="beforeLeave"
+                            @leave="leave"
+                            @after-leave="afterLeave"
+                >
+                    <p class="an a" v-show="show"></p>
+                </transition>
+            </div>
+            <div class="col-md-4">
+                <input type="text" v-model="show1">
+                <transition-group name="fade"
+                                  @before-enter="beforeEnter"
+                                  @enter="enter"
+                                  @after-enter="afterEnter"
+                                  @before-leave="beforeLeave"
+                                  @leave="leave"
+                                  @after-leave="afterLeave">
+                    <p class="an b" v-show="show1" v-for="(val,index) in anLists" :key="index">
+                        {{val}}
+                    </p>
+                </transition-group>
+            </div>
+
+        </div>
+        <hr>
+
+    </div>
+</div>
+<hr>
+<div id="v3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="button" value="添加一个路由" @click="push">
+                <input type="button" value="替换一个路由" @click="replace">
+                <div>
+                    <router-link to="/home">主页</router-link>
+                    <router-link to="/user">新闻</router-link>
+                </div>
+                <div>
+                    <transition enter-active-class="fade-enter-active" leave-active-class="fade-leave-active">
+                        <router-view></router-view>
+                    </transition>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/model/v5/vue2.js"></script>
+<script type="text/javascript" src="../js/model/v5/vue1.js"></script>
+<script type="text/javascript" src="../js/model/v5/vue3.js"></script>
+</body>
+</html>
